@@ -1,21 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 
 public class SceneContext : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private EventReceiver _eventReceiver;
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            
+            _eventReceiver.Call();
         }
     }
 }
