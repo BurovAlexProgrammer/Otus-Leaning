@@ -1,14 +1,15 @@
-﻿using UnityEngine;
+﻿using Primitive;
+using UnityEngine;
 
 namespace DefaultNamespace
 {
     public class Enemy : MonoBehaviour
     {
-        [SerializeField] private EventReceiver _takeDamageReceiver;
+        [SerializeField] private IntEventReceiver _takeDamageReceiver;
         
-        public void TakeDamage()
+        public void TakeDamage(int damage)
         {    
-            _takeDamageReceiver.Call();
+            _takeDamageReceiver.Call(damage);
         }
     }
 }

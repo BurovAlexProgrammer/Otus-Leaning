@@ -1,12 +1,13 @@
-﻿using System;
-using DefaultNamespace;
+﻿using DefaultNamespace;
+using DefaultNamespace.COP;
+using Primitive;
 using UnityEngine;
 
 namespace Mechanic
 {
     public class AttackMechanic : MonoBehaviour
     {
-        [SerializeField] private EventReceiver _attackReceiver;
+        [SerializeField] private EntityEventReceiver _attackReceiver;
         [SerializeField] private TimerBehaviour _coolDown;
 
         [SerializeField] private Enemy _enemy;
@@ -21,13 +22,15 @@ namespace Mechanic
             _attackReceiver.OnEvent -= OnAttackRequested;
         }
 
-        private void OnAttackRequested()
+        private void OnAttackRequested(Entity target)
         {
             if (_coolDown.IsPlaying) return;
-            
-            _enemy.TakeDamage();
+
+            target.Get<ITakeDamageComponent>().TakeDamage(5);
+            //_enemy.TakeDamage(5);
             
             _coolDown.Run();
         }
     }
+    
 }

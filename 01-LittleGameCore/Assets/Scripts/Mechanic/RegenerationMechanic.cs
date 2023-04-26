@@ -1,11 +1,12 @@
 ﻿using DefaultNamespace;
+using Primitive;
 using UnityEngine;
 
 namespace Mechanic
 {
     public class RegenerationMechanic : MonoBehaviour
     {
-        [SerializeField] private EventReceiver _takeDamageReceiver;
+        [SerializeField] private IntEventReceiver _takeDamageReceiver;
         [SerializeField] private IntBehaviour _hitPoints;
         [SerializeField] private TimerBehaviour _cooldownTimer;
         [SerializeField] private TimerBehaviour _regenerateTimer;
@@ -29,7 +30,7 @@ namespace Mechanic
             _regenerateTimer.Run();
         }
 
-        private void OnTakeDamage()
+        private void OnTakeDamage(int damage)
         {
             _regenerateTimer.Stop();
             _cooldownTimer.ResetTimer();

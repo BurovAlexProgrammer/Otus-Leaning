@@ -1,11 +1,15 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-namespace DefaultNamespace
+namespace Primitive
 {
     public class Vector3EventReceiver : MonoBehaviour
     {
-        [SerializeField] private Vector3 _vector3;
-        
-        
+        public event Action<Vector3> OnEvent;
+
+        public void Call(Vector3 value)
+        {
+            OnEvent?.Invoke(value);
+        }
     }
 }
