@@ -20,7 +20,8 @@ namespace Mechanic
 
         private void OnMove(Vector3 moveVector3)
         {
-            _moveTransform.position += moveVector3;
+            var speed = 5f;
+            _moveTransform.position += moveVector3 * speed;
         }
     }
 }

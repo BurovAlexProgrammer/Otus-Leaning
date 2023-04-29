@@ -6,10 +6,14 @@ using UnityEngine.Serialization;
 
 namespace DefaultNamespace.Controller
 {
-    public class InputController : MonoBehaviour
+    public class InputController : MonoBehaviour, IStartGameListener
     {
         public Entity Entity;
         public Entity EnemyEntity;
+        
+        public event Action<Vector3> OnMove;
+        public event Action OnAttack;
+        
         private void Update()
         {
             if (Input.GetKey(KeyCode.A))
@@ -38,12 +42,18 @@ namespace DefaultNamespace.Controller
         private void Attack()
         {
             Entity.Get<IAttackComponent>().Attack(EnemyEntity);
+            OnAttack?.Invoke();
         }
 
         private void Move(Vector3 vector3)
         {
             var speed = 5f;
-            Entity.Get<IMoveComponent>().Move(vector3 * speed * Time.deltaTime);
+            OnMove?.Invoke(vector3);
+        }
+
+        public void OnStartGame()
+        {
+            
         }
     }
 }

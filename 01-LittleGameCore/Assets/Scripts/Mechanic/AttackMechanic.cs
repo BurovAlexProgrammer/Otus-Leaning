@@ -9,6 +9,7 @@ namespace Mechanic
     {
         [SerializeField] private EntityEventReceiver _attackReceiver;
         [SerializeField] private TimerBehaviour _coolDown;
+        [SerializeField] private IntBehaviour _damage;
 
         [SerializeField] private Enemy _enemy;
         
@@ -26,7 +27,7 @@ namespace Mechanic
         {
             if (_coolDown.IsPlaying) return;
 
-            target.Get<ITakeDamageComponent>().TakeDamage(5);
+            target.Get<ITakeDamageComponent>().TakeDamage(_damage.Value);
             //_enemy.TakeDamage(5);
             
             _coolDown.Run();
